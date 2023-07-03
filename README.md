@@ -35,4 +35,11 @@ Now that we have the model ready, we can "register" it in Azure. "Registering th
 <img width="1321" alt="Screen Shot 2023-07-03 at 3 47 12 PM" src="https://github.com/NehaBardeDUKE/AIPI_561_Individual_Project_2/assets/110474064/48d4fc17-2309-4fdb-951c-7d217a76b485">
 
 #### With creating the required rest api endpoint, Azure also provides a functionality to test if the endpoint is healthy and providing the output as expected. This test instance is just picked from the 10% of the test dataset that was split earlier during training phase. It also provides a script that acts like a blueprint of how to consume the api. Based on the usecase you can modify the script. For this project i have only modified it to read a file from my local machine and run the inference.
+The python notebook attached in this project provides that implementation.
+
+## Future Scope:
+
+1. Deploy a Flask or gradio application which provides a UI for image upload
+2. Create a pipeline without the scoring component for real time inferencing.
+3. Increase the dataset and retrain for better fine tuning.
 
