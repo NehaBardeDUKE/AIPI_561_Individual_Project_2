@@ -14,5 +14,16 @@ So the data i chose was the publically available brain tumor dataset from Kaggle
 
 ## Designer
 
-After the data is loaded in the datastore, you can either create an automated ML job to train or test. I preferred using the Designer, which would let me implement different components to create a pipeline. Here i used a pretrained DenseNet model for the training. The designer has different components like 
+After the data is loaded in the datastore, you can either create an automated ML job to train or test. I preferred using the Designer, which would let me implement different components to create a pipeline. Here i used a pretrained DenseNet model for the training. The designer has different components for different usecases. I picked the computer vision usecase and found components that facilitate image transformations (and other preprocessing utilities) along with a choice of the pretrained models available (DenseNet andd ResNet) for the image classification task.
+Once you have the required components, based on the number and types if inputs you can just drag and drop those components and create flow charts using them to define your pipelines. The neat thing about this is that if you change your data at some point, or add more data, you dont really have to bother too much about making any changes to any scripts or in the pipeline. You can simply remove the reference to the previous data component and add the reference to the new one and resubmit the pipeline. 
+
+#### The designer essentially runs the whole pipeline on some compute resource. This could either be a compute cluster or a compute instance. So it is imperative that these be created ahead of firing any jobs from the pipeline. For my experiments i created a dedicated compute instance for which i created startup and shutdown schedules based on when i want the training pipeline to rerun (right now it is on every 6 months cadence). For real time inferencing, if the compute instance is down you will not be able to get any inference as that happens using the CPU resources in the instance. For training purposes my compute instance has a GPU resource, which brings down the training time to about 5 mins for the current data size. Below is the flow chart design of my training pipeline.
+
+<img width="1450" alt="Screen Shot 2023-07-03 at 3 22 53 PM" src="https://github.com/NehaBardeDUKE/AIPI_561_Individual_Project_2/assets/110474064/04818901-f096-443a-aa2a-94723ccc0939">
+
+#### The last bloack i.e Evaluation Results gives the confusion matrix for the classification that was performed. Below is the confusion matrix for my dataset. Here yyou can see that the model does a decent job of identifying the negative images even though the training data there is less than that of the positive samples. The positive classification does take a significant hit. The recall is 0.87 which can be made better for the usecase with more training data.
+
+
+<img width="426" alt="Screen Shot 2023-07-03 at 3 02 37 PM" src="https://github.com/NehaBardeDUKE/AIPI_561_Individual_Project_2/assets/110474064/25eab6dd-2193-43ee-9f01-c6d2796a5541">
+
 
