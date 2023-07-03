@@ -1,0 +1,30 @@
+flavor:
+  name: pytorch
+  serialization_method: state_dict
+model_file: model
+time_created: 2023-07-01T21:26:41.446521+0000
+flavor_extras:
+  module: azureml.designer.modules.dl.pytorch.initialize_models.vision.classification.densenet
+  class: DenseNet
+  is_cuda: false
+  init_params:
+    model_name: densenet201
+    pretrained: true
+    memory_efficient: false
+    num_classes: 2
+task_type: MultiClassification
+label_map_file: index_to_label.csv
+inputs:
+- name: image
+  pre_processor:
+    module: azureml.designer.core.model.model_spec.builtin_model_meta.pre_processor
+    class: ImageNormalizer
+    init_params:
+      mean:
+      - 0.5
+      - 0.5
+      - 0.5
+      std:
+      - 0.5
+      - 0.5
+      - 0.5
